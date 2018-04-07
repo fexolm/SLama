@@ -9,7 +9,7 @@
 #include <stdlib.h>
 START_TEST (block_alloc_test)
   {
-    __SL_m_block *block = __SL_m_allocBlock(sizeof(int)*10);
+    __SL_m_Block *block = __SL_m_allocBlock(sizeof(int)*10);
     int *arr = block->mem;
     for (int i = 0; i < block->len/sizeof(int); i++) {
       arr[i] = i + 2;
@@ -23,9 +23,9 @@ END_TEST
 
 START_TEST (block_link_test)
   {
-    __SL_m_block *block = __SL_m_allocBlock(sizeof(int)*10);
+    __SL_m_Block *block = __SL_m_allocBlock(sizeof(int)*10);
 
-    __SL_m_block *block2 = __SL_m_addLink(block);
+    __SL_m_Block *block2 = __SL_m_addLink(block);
 
     int *arr = block->mem;
     for (int i = 0; i < block->len/sizeof(int); i++) {
@@ -44,13 +44,13 @@ END_TEST
 
 START_TEST (block_copy_test)
   {
-    __SL_m_block *block = __SL_m_allocBlock(sizeof(int)*10);
+    __SL_m_Block *block = __SL_m_allocBlock(sizeof(int)*10);
 
     int *arr = block->mem;
     for (int i = 0; i < block->len/sizeof(int); i++) {
       arr[i] = i + 2;
     }
-    __SL_m_block *block2 = __SL_m_copyBlock(block);
+    __SL_m_Block *block2 = __SL_m_copyBlock(block);
 
     __SL_m_destroyBlock(block);
 
@@ -66,8 +66,8 @@ END_TEST
 
 START_TEST (block_swap_test)
   {
-    __SL_m_block *block = __SL_m_allocBlock(sizeof(int)*10);
-    __SL_m_block *block2 = __SL_m_allocBlock(sizeof(int)*10);
+    __SL_m_Block *block = __SL_m_allocBlock(sizeof(int)*10);
+    __SL_m_Block *block2 = __SL_m_allocBlock(sizeof(int)*10);
 
     int *arr = block->mem;
     for (int i = 0; i < block->len/sizeof(int); i++) {
@@ -94,21 +94,12 @@ END_TEST
 
 Suite *block_test_suite() {
   Suite *s = suite_create("Block");
-  TCase *tc_alloc = tcase_create("Alloc test");
-  tcase_add_test(tc_alloc, block_alloc_test);
-  suite_add_tcase(s, tc_alloc);
-
-  TCase *tc_link = tcase_create("Link test");
-  tcase_add_test(tc_link, block_alloc_test);
-  suite_add_tcase(s, tc_link);
-
-  TCase *tc_copy = tcase_create("Copy test");
-  tcase_add_test(tc_copy, block_copy_test);
-  suite_add_tcase(s, tc_copy);
-
-  TCase *tc_swap = tcase_create("Swap test");
-  tcase_add_test(tc_swap, block_swap_test);
-  suite_add_tcase(s, tc_swap);
+  TCase *tcase = tcase_create("Alloc test");
+  tcase_add_test(tcase, block_alloc_test);
+  tcase_add_test(tcase, block_alloc_test);
+  tcase_add_test(tcase, block_copy_test);
+  tcase_add_test(tcase, block_swap_test);
+  suite_add_tcase(s, tcase);
 
   return s;
 }
