@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 project(SLama-tests)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_C_STANDARD 11)
 set(CMAKE_MODULE_PATH ../cmake)
 
 enable_testing()
