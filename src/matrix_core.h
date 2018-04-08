@@ -3,6 +3,10 @@
  * @date 05.04.18.
  *
  * @brief Matrix data structure implementation
+ *
+ * @todo
+ *  - add implement const matrix share
+ *  - implement reshape
  */
 #pragma once
 
@@ -56,7 +60,7 @@ void SL_m_transpose(SL_m_Matrix *matrix);
 /*!
  * @brief return matrix element on index x, y
  */
-double SL_m_getElementDouble_(SL_m_Matrix *matrix, int x, int y);
+double SL_m_getElementDouble(SL_m_Matrix *matrix, int x, int y);
 
 /*!
  * @brief set matrix element on index x, y

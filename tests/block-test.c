@@ -94,7 +94,7 @@ END_TEST
 
 Suite *block_test_suite() {
   Suite *s = suite_create("Block");
-  TCase *tcase = tcase_create("Alloc test");
+  TCase *tcase = tcase_create("Block test");
   tcase_add_test(tcase, block_alloc_test);
   tcase_add_test(tcase, block_alloc_test);
   tcase_add_test(tcase, block_copy_test);
