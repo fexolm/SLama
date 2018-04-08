@@ -14,6 +14,6 @@ include_directories(../src/)
 add_test(block_test block_test)
 
 add_executable(base_matrix_test base-matrix-test.c)
-target_link_libraries(base_matrix_test SLama ${Check_LIBRARIES})
+target_link_libraries(base_matrix_test SLama ${Check_LIBRARIES} m)
 include_directories(../src/)
 add_test(base_matrix_test base_matrix_test)
