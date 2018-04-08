@@ -9,7 +9,7 @@
 #include <block.h>
 START_TEST (block_alloc_test)
   {
-    __SL_b_Block *block = __SL_b_alloc(sizeof(int)*10);
+    SL_b_Block *block = SL_b_alloc(sizeof(int)*10);
     int *arr = block->mem;
     for (int i = 0; i < block->len/sizeof(int); i++) {
       arr[i] = i + 2;
@@ -17,42 +17,42 @@ START_TEST (block_alloc_test)
     for (int i = 9; i >= 0; i--) {
       ck_assert_int_eq(arr[i], i + 2);
     }
-    __SL_b_destroy(block);
+    SL_b_destroy(block);
   }
 END_TEST
 
 START_TEST (block_link_test)
   {
-    __SL_b_Block *block = __SL_b_alloc(sizeof(int)*10);
+    SL_b_Block *block = SL_b_alloc(sizeof(int)*10);
 
-    __SL_b_Block *block2 = __SL_b_share(block);
+    SL_b_Block *block2 = SL_b_share(block);
 
     int *arr = block->mem;
     for (int i = 0; i < block->len/sizeof(int); i++) {
       arr[i] = i + 2;
     }
-    __SL_b_destroy(block);
+    SL_b_destroy(block);
 
     arr = block2->mem;
 
     for (int i = 9; i >= 0; i--) {
       ck_assert_int_eq(arr[i], i + 2);
     }
-    __SL_b_destroy(block2);
+    SL_b_destroy(block2);
   }
 END_TEST
 
 START_TEST (block_copy_test)
   {
-    __SL_b_Block *block = __SL_b_alloc(sizeof(int)*10);
+    SL_b_Block *block = SL_b_alloc(sizeof(int)*10);
 
     int *arr = block->mem;
     for (int i = 0; i < block->len/sizeof(int); i++) {
       arr[i] = i + 2;
     }
-    __SL_b_Block *block2 = __SL_b_copy(block);
+    SL_b_Block *block2 = SL_b_copy(block);
 
-    __SL_b_destroy(block);
+    SL_b_destroy(block);
 
     arr = block2->mem;
 
@@ -60,14 +60,14 @@ START_TEST (block_copy_test)
       ck_assert_int_eq(arr[i], i + 2);
     }
 
-    __SL_b_destroy(block2);
+    SL_b_destroy(block2);
   }
 END_TEST
 
 START_TEST (block_swap_test)
   {
-    __SL_b_Block *block = __SL_b_alloc(sizeof(int)*10);
-    __SL_b_Block *block2 = __SL_b_alloc(sizeof(int)*10);
+    SL_b_Block *block = SL_b_alloc(sizeof(int)*10);
+    SL_b_Block *block2 = SL_b_alloc(sizeof(int)*10);
 
     int *arr = block->mem;
     for (int i = 0; i < block->len/sizeof(int); i++) {
@@ -78,7 +78,7 @@ START_TEST (block_swap_test)
       arr[i] = i - 2;
     }
 
-    __SL_b_swap(block, block2);
+    SL_b_swap(block, block2);
 
     arr = block2->mem;
     for (int i = 9; i >= 0; i--) {
@@ -88,7 +88,7 @@ START_TEST (block_swap_test)
     for (int i = 9; i >= 0; i--) {
       ck_assert_int_eq(arr[i], i - 2);
     }
-    __SL_b_destroy(block2);
+    SL_b_destroy(block2);
   }
 END_TEST
 
