@@ -5,7 +5,6 @@
  * @todo add limits check
  */
 
-#include <libzvbi.h>
 #include "matrix_core.h"
 #include <stdlib.h>
 #include <assert.h>
