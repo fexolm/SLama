@@ -1,7 +1,6 @@
 language: c
 compiler:
   - gcc
-  - clang
 addons:
   apt:
     sources:
@@ -16,3 +15,6 @@ script:
   - cd build
   - cmake .. && make
   - make test
+after_success:
+  - cd ..
+  - coveralls --exclude tests
