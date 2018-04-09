@@ -5,6 +5,8 @@
 #pragma once
 #include <stdio.h>
 #include <matrix_core.h>
+#include <math.h>
+#include <Testy/assert.h>
 
 double func(double x, double y) {
   return 6*sin(x) - y*y;
@@ -31,7 +33,7 @@ void print_matrix(SL_m_Matrix *matrix) {
 void base_check_matrix(SL_m_Matrix *matrix) {
   for (int y = 0; y < matrix->height; y++) {
     for (int x = 0; x < matrix->width; x++) {
-      ck_assert_double_eq(SL_m_getElementDouble(matrix, x, y), func(x, y));
+      testy_assert_double_eq(SL_m_getElementDouble(matrix, x, y), func(x, y));
     }
   }
 }
