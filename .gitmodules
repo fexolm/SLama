@@ -1,0 +1,3 @@
+[submodule "libs/Testy"]
+	path = libs/Testy
+	url = https://github.com/weeellz/Testy.git

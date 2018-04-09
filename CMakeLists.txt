@@ -10,5 +10,6 @@ enable_testing()
 file(GLOB SOURCE_FILES src/*)
 
 add_subdirectory(tests)
+add_subdirectory(libs/Testy)
 
 add_library(SLama ${SOURCE_FILES})
