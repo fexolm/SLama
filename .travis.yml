@@ -9,13 +9,14 @@ addons:
       - gcc-4.9
       - cmake
       - check
+  sonarcloud:
+    organization: "fexolm-github"
 before_install:
   - pip install --user cpp-coveralls
 script:
   - mkdir build
   - cd build
-  - cmake .. && make
-  - make test
+  - cmake .. && make && make test && sonar-scanner
 after_success:
   - cd ..
   - coveralls --exclude tests --exclude libs
