@@ -9,7 +9,8 @@ addons:
       - gcc-4.9
       - cmake
       - check
-
+before_install:
+  - pip install --user cpp-coveralls
 script:
   - mkdir build
   - cd build
