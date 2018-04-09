@@ -16,7 +16,6 @@ before_install:
 script:
   - mkdir build
   - cd build
-  - cmake .. && make && make test && sonar-scanner
+  - cmake .. && make && make test && cd .. && sonar-scanner
 after_success:
-  - cd ..
   - coveralls --exclude tests --exclude libs
