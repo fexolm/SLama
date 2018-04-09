@@ -88,6 +88,7 @@ START_TEST (block_swap_test)
     for (int i = 9; i >= 0; i--) {
       ck_assert_int_eq(arr[i], i - 2);
     }
+    SL_b_destroy(block);
     SL_b_destroy(block2);
   }
 END_TEST
@@ -99,6 +100,7 @@ Suite *block_test_suite() {
   tcase_add_test(tcase, block_alloc_test);
   tcase_add_test(tcase, block_copy_test);
   tcase_add_test(tcase, block_swap_test);
+  tcase_add_test(tcase, block_link_test);
   suite_add_tcase(s, tcase);
 
   return s;

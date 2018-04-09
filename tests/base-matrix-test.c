@@ -68,7 +68,6 @@ START_TEST (matrix_transpose_test)
         ck_assert_double_eq(SL_m_getElementDouble(matrix, y, x), func(x, y));
       }
     }
-
     SL_m_destroy(matrix);
   }
 END_TEST

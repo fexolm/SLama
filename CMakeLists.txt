@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 2.8)
 project(SLama)
 
 set(CMAKE_C_STANDARD 11)
+set (CMAKE_SHARED_LINKER_FLAGS "-Wl,-fsanitize=address -fprofile-arcs -ftest-coverage")
+set(CMAKE_C_FLAGS "-g -O0 -Wall -std=c11 -Werror -fsanitize=address -fprofile-arcs -ftest-coverage")
 
 enable_testing()
 
