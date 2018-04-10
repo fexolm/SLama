@@ -9,8 +9,11 @@
 #include <Testy/testy.h>
 #include <Testy/assert.h>
 
-TESTY_CASE (block_alloc_test) {
-  SL_b_Block *block = SL_b_alloc(sizeof(int)*10);
+TESTY_INIT
+
+TESTY_CASE (block_alloc_test)
+  SL_b_Block *block = NULL;
+  block = SL_b_alloc(sizeof(int)*10);
   int *arr = block->mem;
   for (int i = 0; i < block->len/sizeof(int); i++) {
     arr[i] = i + 2;
@@ -18,51 +21,66 @@ TESTY_CASE (block_alloc_test) {
   for (int i = 9; i >= 0; i--) {
     testy_assert_int_eq(arr[i], i + 2);
   }
-  SL_b_destroy(block);
-}
+TEASTY_CLEANUP
+  if (block)
+    SL_b_destroy(block);
+END_CASE
 
-TESTY_CASE (block_link_test) {
-  SL_b_Block *block = SL_b_alloc(sizeof(int)*10);
+TESTY_CASE (block_link_test)
+  SL_b_Block *block = NULL;
+  SL_b_Block *block2 = NULL;
 
-  SL_b_Block *block2 = SL_b_share(block);
+  block = SL_b_alloc(sizeof(int)*10);
+
+  block2 = SL_b_share(block);
 
   int *arr = block->mem;
   for (int i = 0; i < block->len/sizeof(int); i++) {
     arr[i] = i + 2;
   }
-  SL_b_destroy(block);
 
   arr = block2->mem;
 
   for (int i = 9; i >= 0; i--) {
     testy_assert_int_eq(arr[i], i + 2);
   }
-  SL_b_destroy(block2);
-}
+TEASTY_CLEANUP
+  if (block)
+    SL_b_destroy(block);
+  if (block2)
+    SL_b_destroy(block2);
+END_CASE
 
-TESTY_CASE (block_copy_test) {
-  SL_b_Block *block = SL_b_alloc(sizeof(int)*10);
+TESTY_CASE (block_copy_test)
+  SL_b_Block *block = NULL;
+  SL_b_Block *block2 = NULL;
+
+  block = SL_b_alloc(sizeof(int)*10);
 
   int *arr = block->mem;
   for (int i = 0; i < block->len/sizeof(int); i++) {
     arr[i] = i + 2;
   }
-  SL_b_Block *block2 = SL_b_copy(block);
-
-  SL_b_destroy(block);
+  block2 = SL_b_copy(block);
 
   arr = block2->mem;
 
   for (int i = 9; i >= 0; i--) {
     testy_assert_int_eq(arr[i], i + 2);
   }
+TEASTY_CLEANUP
+  if (block)
+    SL_b_destroy(block);
+  if (block2)
+    SL_b_destroy(block2);
+END_CASE
 
-  SL_b_destroy(block2);
-}
+TESTY_CASE (block_swap_test)
+  SL_b_Block *block = NULL;
+  SL_b_Block *block2 = NULL;
 
-TESTY_CASE (block_swap_test) {
-  SL_b_Block *block = SL_b_alloc(sizeof(int)*10);
-  SL_b_Block *block2 = SL_b_alloc(sizeof(int)*10);
+  block = SL_b_alloc(sizeof(int)*10);
+  block2 = SL_b_alloc(sizeof(int)*10);
 
   int *arr = block->mem;
   for (int i = 0; i < block->len/sizeof(int); i++) {
@@ -83,10 +101,12 @@ TESTY_CASE (block_swap_test) {
   for (int i = 9; i >= 0; i--) {
     testy_assert_int_eq(arr[i], i - 2);
   }
-  SL_b_destroy(block);
-  SL_b_destroy(block2);
-}
-
+TEASTY_CLEANUP
+  if (block)
+    SL_b_destroy(block);
+  if (block2)
+    SL_b_destroy(block2);
+END_CASE
 
 int main() {
   testy_Runner runner = testy_allocRunner();
@@ -96,6 +116,7 @@ int main() {
   testy_addCase(runner, block_swap_test);
   testy_addCase(runner, block_link_test);
   testy_run(runner);
-  testy_destoyRunner(runner);
-  return 0;
+  int errors = testy_errorCount(runner);
+  testy_destroyRunner(runner);
+  return errors ? EXIT_FAILURE:EXIT_SUCCESS;
 }
