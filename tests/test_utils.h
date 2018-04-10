@@ -7,6 +7,9 @@
 #include <matrix_core.h>
 #include <math.h>
 #include <Testy/assert.h>
+#include <Testy/testy.h>
+
+TESTY_INIT
 
 double func(double x, double y) {
   return 6*sin(x) - y*y;
