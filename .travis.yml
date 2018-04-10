@@ -1,6 +1,12 @@
 language: c
 compiler:
   - gcc
+  
+  
+before_install:
+  - pip install --user cpp-coveralls
+  - echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
+  
 addons:
   apt:
     sources:
@@ -9,8 +15,17 @@ addons:
       - gcc-4.9
       - cmake
       - check
-before_install:
-  - pip install --user cpp-coveralls
+
+  coverity_scan:
+    project:
+      name: "fexolm/SLama"
+    build_command_prepend: 
+      - mkdir build
+      - cd build
+    build_command: 
+      - cmake .. && make && cd ..
+    branch_pattern: coverity_scan
+
 script:
   - mkdir build
   - cd build
