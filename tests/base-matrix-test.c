@@ -18,7 +18,7 @@ TESTY_CASE (matrix_alloc_test)
   fill_matrix(matrix);
 
   base_check_matrix(matrix);
-TEASTY_CLEANUP
+TESTY_CLEANUP
   if (matrix)
     SL_m_destroy(matrix);
 END_CASE
@@ -35,7 +35,7 @@ TESTY_CASE (matrix_copy_test)
   matrix1 = SL_m_fullCopy(matrix);
 
   base_check_matrix(matrix1);
-TEASTY_CLEANUP
+TESTY_CLEANUP
   if (matrix)
     SL_m_destroy(matrix);
   if (matrix1)
@@ -54,7 +54,7 @@ TESTY_CASE (matrix_share_test)
 
   base_check_matrix(matrix1);
 
-TEASTY_CLEANUP
+TESTY_CLEANUP
   if (matrix)
     SL_m_destroy(matrix);
   if (matrix1)
@@ -74,7 +74,7 @@ TESTY_CASE (matrix_transpose_test)
       testy_assert_double_eq(SL_m_getElementDouble(matrix, y, x), func(x, y));
     }
   }
-TEASTY_CLEANUP
+TESTY_CLEANUP
   if (matrix)
     SL_m_destroy(matrix);
 END_CASE
@@ -87,7 +87,7 @@ TESTY_CASE (matrix_slice_test)
 
   fill_matrix(matrix);
 
-  matrix1 = SL_m_getSlice(matrix, 3, 2, 5, 7);
+  matrix1 = SL_m_slice(matrix, 3, 2, 5, 7);
   for (int x = 0; x < matrix1->width; x++) {
     for (int y = 0; y < matrix1->height; y++) {
       testy_assert_double_eq(SL_m_getElementDouble(matrix1, x, y), func(x + 3, y + 2));
@@ -106,7 +106,7 @@ TESTY_CASE (matrix_slice_test)
       testy_assert_double_eq(SL_m_getElementDouble(matrix2, y, x), func(x + 3, y + 2));
     }
   }
-TEASTY_CLEANUP
+TESTY_CLEANUP
   if (matrix)
     SL_m_destroy(matrix);
   if (matrix1)

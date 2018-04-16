@@ -21,7 +21,7 @@ TESTY_CASE (block_alloc_test)
   for (int i = 9; i >= 0; i--) {
     testy_assert_int_eq(arr[i], i + 2);
   }
-TEASTY_CLEANUP
+TESTY_CLEANUP
   if (block)
     SL_b_destroy(block);
 END_CASE
@@ -44,7 +44,7 @@ TESTY_CASE (block_link_test)
   for (int i = 9; i >= 0; i--) {
     testy_assert_int_eq(arr[i], i + 2);
   }
-TEASTY_CLEANUP
+TESTY_CLEANUP
   if (block)
     SL_b_destroy(block);
   if (block2)
@@ -68,7 +68,7 @@ TESTY_CASE (block_copy_test)
   for (int i = 9; i >= 0; i--) {
     testy_assert_int_eq(arr[i], i + 2);
   }
-TEASTY_CLEANUP
+TESTY_CLEANUP
   if (block)
     SL_b_destroy(block);
   if (block2)
@@ -101,7 +101,7 @@ TESTY_CASE (block_swap_test)
   for (int i = 9; i >= 0; i--) {
     testy_assert_int_eq(arr[i], i - 2);
   }
-TEASTY_CLEANUP
+TESTY_CLEANUP
   if (block)
     SL_b_destroy(block);
   if (block2)

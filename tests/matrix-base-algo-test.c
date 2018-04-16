@@ -38,7 +38,7 @@ TESTY_CASE (matrix_sum_test)
 
     }
   }
-TEASTY_CLEANUP
+TESTY_CLEANUP
   if (matrix)
     SL_m_destroy(matrix);
   if (matrix1)
@@ -73,7 +73,7 @@ TESTY_CASE (matrix_diff_test)
 
     }
   }
-TEASTY_CLEANUP
+TESTY_CLEANUP
   if (matrix)
     SL_m_destroy(matrix);
   if (matrix1)
@@ -94,7 +94,7 @@ TESTY_CASE (matrix_scale_test)
       testy_assert_double_eq(SL_m_getElementDouble(matrix, x, y), func(x, y)*4.54);
     }
   }
-TEASTY_CLEANUP
+TESTY_CLEANUP
   if (matrix)
     SL_m_destroy(matrix);
 END_CASE

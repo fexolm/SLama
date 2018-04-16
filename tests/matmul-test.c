@@ -70,7 +70,8 @@ TESTY_CASE (matmul_test1)
   testy_assert_double_eq(SL_m_getElementDouble(result, 2, 2), 7110);
   testy_assert_double_eq(SL_m_getElementDouble(result, 3, 2), 4454);
   testy_assert_double_eq(SL_m_getElementDouble(result, 4, 2), 3869);
-TEASTY_CLEANUP
+
+TESTY_CLEANUP
   if (matrix1)
     SL_m_destroy(matrix1);
   if (matrix2)

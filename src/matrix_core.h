@@ -80,7 +80,7 @@ SL_m_Matrix *SL_m_copyDouble(SL_m_Matrix *matrix);
 /*!
  * @brief return submatrix with row starting at xbegin on original matrix
  */
-SL_m_Matrix *SL_m_getSlice(SL_m_Matrix *matrix, int xbegin, int ybegin, size_t width, size_t height);
+SL_m_Matrix *SL_m_slice(SL_m_Matrix *matrix, int xbegin, int ybegin, size_t width, size_t height);
 
 
 

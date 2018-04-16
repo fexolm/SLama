@@ -29,3 +29,8 @@ add_executable(matmul_test test_utils.h matmul-test.c)
 target_link_libraries(matmul_test SLama m testy)
 include_directories(../src/ ../libs/Testy/include)
 add_test(matmul_test matmul_test)
+
+add_executable(vector_test test_utils.h vector-test.c)
+target_link_libraries(vector_test SLama m testy)
+include_directories(../src/ ../libs/Testy/include)
+add_test(vector_test vector_test)
