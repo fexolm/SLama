@@ -7,8 +7,6 @@
 #include <stdlib.h>
 #include <matrix_algorithms.h>
 #include "test_utils.h"
-#include <Testy/testy.h>
-#include <Testy/assert.h>
 
 TESTY_INIT
 
@@ -38,7 +36,7 @@ TESTY_CASE (matrix_sum_test)
 
     }
   }
-TEASTY_CLEANUP
+TESTY_CLEANUP
   if (matrix)
     SL_m_destroy(matrix);
   if (matrix1)
@@ -73,7 +71,7 @@ TESTY_CASE (matrix_diff_test)
 
     }
   }
-TEASTY_CLEANUP
+TESTY_CLEANUP
   if (matrix)
     SL_m_destroy(matrix);
   if (matrix1)
@@ -94,7 +92,7 @@ TESTY_CASE (matrix_scale_test)
       testy_assert_double_eq(SL_m_getElementDouble(matrix, x, y), func(x, y)*4.54);
     }
   }
-TEASTY_CLEANUP
+TESTY_CLEANUP
   if (matrix)
     SL_m_destroy(matrix);
 END_CASE
@@ -107,5 +105,5 @@ int main() {
   testy_run(runner);
   int errors = testy_errorCount(runner);
   testy_destroyRunner(runner);
-  return errors ? EXIT_FAILURE:EXIT_SUCCESS;
+  return errors ? EXIT_FAILURE : EXIT_SUCCESS;
 }

@@ -3,7 +3,6 @@
  * @date 05.04.18.
  */
 
-#include <stdint.h>
 #include <stdlib.h>
 #include <block.h>
 #include <Testy/testy.h>
@@ -21,7 +20,7 @@ TESTY_CASE (block_alloc_test)
   for (int i = 9; i >= 0; i--) {
     testy_assert_int_eq(arr[i], i + 2);
   }
-TEASTY_CLEANUP
+TESTY_CLEANUP
   if (block)
     SL_b_destroy(block);
 END_CASE
@@ -44,7 +43,7 @@ TESTY_CASE (block_link_test)
   for (int i = 9; i >= 0; i--) {
     testy_assert_int_eq(arr[i], i + 2);
   }
-TEASTY_CLEANUP
+TESTY_CLEANUP
   if (block)
     SL_b_destroy(block);
   if (block2)
@@ -68,7 +67,7 @@ TESTY_CASE (block_copy_test)
   for (int i = 9; i >= 0; i--) {
     testy_assert_int_eq(arr[i], i + 2);
   }
-TEASTY_CLEANUP
+TESTY_CLEANUP
   if (block)
     SL_b_destroy(block);
   if (block2)
@@ -101,7 +100,7 @@ TESTY_CASE (block_swap_test)
   for (int i = 9; i >= 0; i--) {
     testy_assert_int_eq(arr[i], i - 2);
   }
-TEASTY_CLEANUP
+TESTY_CLEANUP
   if (block)
     SL_b_destroy(block);
   if (block2)
@@ -118,5 +117,5 @@ int main() {
   testy_run(runner);
   int errors = testy_errorCount(runner);
   testy_destroyRunner(runner);
-  return errors ? EXIT_FAILURE:EXIT_SUCCESS;
+  return errors ? EXIT_FAILURE : EXIT_SUCCESS;
 }

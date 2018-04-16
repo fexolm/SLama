@@ -84,7 +84,7 @@ SL_m_Matrix *SL_m_copyDouble(SL_m_Matrix *matrix) {
   }
   return result;
 }
-SL_m_Matrix *SL_m_getSlice(SL_m_Matrix *matrix, int xbegin, int ybegin, size_t width, size_t height) {
+SL_m_Matrix *SL_m_slice(SL_m_Matrix *matrix, int xbegin, int ybegin, size_t width, size_t height) {
   __checkLimits(matrix, xbegin, ybegin);
   __checkLimits(matrix, (int) (xbegin + width), (int) (ybegin + height));
   SL_m_Matrix *result = SL_m_share(matrix);

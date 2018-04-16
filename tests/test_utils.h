@@ -8,6 +8,7 @@
 #include <math.h>
 #include <Testy/assert.h>
 #include <Testy/testy.h>
+#include <vector.h>
 
 TESTY_INIT
 
@@ -39,4 +40,11 @@ void base_check_matrix(SL_m_Matrix *matrix) {
       testy_assert_double_eq(SL_m_getElementDouble(matrix, x, y), func(x, y));
     }
   }
+}
+
+void print_vector(SL_v_Vector *v) {
+  for (size_t i = 0; i < v->size; i++) {
+    printf("%f ", SL_v_getElementDouble(v, i));
+  }
+  printf("\n");
 }
