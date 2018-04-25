@@ -4,8 +4,8 @@
  */
 #include <stdlib.h>
 #include <assert.h>
-#include <stdio.h>
 #include "vector.h"
+#include "matrix_core.h"
 
 static inline void __checkLimits(SL_v_Vector *vector, size_t size) {
   assert(size >= 0 && size < vector->size && "Size out of range");
@@ -87,9 +87,25 @@ SL_v_Vector *SL_v_diffDouble(SL_v_Vector *lhs, SL_v_Vector *rhs) {
   SL_v_substractDouble(result, rhs);
   return result;
 }
-double SL_v_dot(SL_v_Vector *lhs, SL_v_Vector *rhs) {
-  return 0;
+double SL_v_dotDouble(SL_v_Vector *lhs, SL_v_Vector *rhs) {
+  assert(lhs->size==rhs->size);
+  double res = 0;
+  double *lmem = lhs->block->mem;
+  double *rmem = rhs->block->mem;
+  for (int i = 0; i < lhs->size; i++) {
+    res += lmem[i]*rmem[i];
+  }
+  return res;
 }
-SL_m_Matrix *SL_v_toMatrix() {
-  return NULL;
+SL_m_Matrix *SL_v_toMatrix(SL_v_Vector *vector) {
+  SL_m_Matrix *matrix = malloc(sizeof(SL_m_Matrix));
+  matrix->block = SL_b_share(vector->block);
+  matrix->block_width = 1;
+  matrix->block_height = matrix->block->len;
+  matrix->height = vector->size;
+  matrix->width = 1;
+  matrix->offsetX = 0;
+  matrix->offsetY = vector->offset;
+  matrix->transpose = false;
+  return matrix;
 }
