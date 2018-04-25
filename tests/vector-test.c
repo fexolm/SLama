@@ -146,84 +146,82 @@ TESTY_CLEANUP
 END_CASE
 
 TESTY_CASE(dot_test)
-	SL_v_Vector *v1 = NULL;
-	SL_v_Vector *v2 = NULL;
+  SL_v_Vector *v1 = NULL;
+  SL_v_Vector *v2 = NULL;
 
-	v1 = SL_v_allocDouble(5);
-	v2 = SL_v_allocDouble(5);
+  v1 = SL_v_allocDouble(5);
+  v2 = SL_v_allocDouble(5);
 
-	SL_v_setElementDouble(v1, 0, 5);
-	SL_v_setElementDouble(v1, 1, 6);
-	SL_v_setElementDouble(v1, 2, 8);
-	SL_v_setElementDouble(v1, 3, 2);
-	SL_v_setElementDouble(v1, 4, 1);
+  SL_v_setElementDouble(v1, 0, 5);
+  SL_v_setElementDouble(v1, 1, 6);
+  SL_v_setElementDouble(v1, 2, 8);
+  SL_v_setElementDouble(v1, 3, 2);
+  SL_v_setElementDouble(v1, 4, 1);
 
-	SL_v_setElementDouble(v2, 0, 41);
-	SL_v_setElementDouble(v2, 1, 51);
-	SL_v_setElementDouble(v2, 2, 32);
-	SL_v_setElementDouble(v2, 3, 10);
-	SL_v_setElementDouble(v2, 4, 21);
+  SL_v_setElementDouble(v2, 0, 41);
+  SL_v_setElementDouble(v2, 1, 51);
+  SL_v_setElementDouble(v2, 2, 32);
+  SL_v_setElementDouble(v2, 3, 10);
+  SL_v_setElementDouble(v2, 4, 21);
 
-	double res = SL_v_dotDouble(v1, v2);
-	
-	testy_assert_double_eq(res, 808);
+  double res = SL_v_dotDouble(v1, v2);
+
+  testy_assert_double_eq(res, 808);
 
 TESTY_CLEANUP
-	if(v1)
-		SL_v_destroy(v1);
-	if(v2)
-		SL_v_destroy(v2);
+  if (v1)
+    SL_v_destroy(v1);
+  if (v2)
+    SL_v_destroy(v2);
 END_CASE
 
 TESTY_CASE(to_matrix_dot_test)
-	SL_v_Vector *v1 = NULL;
-	SL_v_Vector *v2 = NULL;
-	SL_m_Matrix *m1 = NULL;
-	SL_m_Matrix *m2 = NULL;
-	SL_m_Matrix *res = NULL;
+  SL_v_Vector *v1 = NULL;
+  SL_v_Vector *v2 = NULL;
+  SL_m_Matrix *m1 = NULL;
+  SL_m_Matrix *m2 = NULL;
+  SL_m_Matrix *res = NULL;
 
-	v1 = SL_v_allocDouble(5);
-	v2 = SL_v_allocDouble(5);
+  v1 = SL_v_allocDouble(5);
+  v2 = SL_v_allocDouble(5);
 
-	SL_v_setElementDouble(v1, 0, 5);
-	SL_v_setElementDouble(v1, 1, 6);
-	SL_v_setElementDouble(v1, 2, 8);
-	SL_v_setElementDouble(v1, 3, 2);
-	SL_v_setElementDouble(v1, 4, 1);
+  SL_v_setElementDouble(v1, 0, 5);
+  SL_v_setElementDouble(v1, 1, 6);
+  SL_v_setElementDouble(v1, 2, 8);
+  SL_v_setElementDouble(v1, 3, 2);
+  SL_v_setElementDouble(v1, 4, 1);
 
-	SL_v_setElementDouble(v2, 0, 41);
-	SL_v_setElementDouble(v2, 1, 51);
-	SL_v_setElementDouble(v2, 2, 32);
-	SL_v_setElementDouble(v2, 3, 10);
-	SL_v_setElementDouble(v2, 4, 21);
-	
-	m1 = SL_v_toMatrix(v1);
-	m2 = SL_v_toMatrix(v2);
-	SL_m_transpose(m1);
+  SL_v_setElementDouble(v2, 0, 41);
+  SL_v_setElementDouble(v2, 1, 51);
+  SL_v_setElementDouble(v2, 2, 32);
+  SL_v_setElementDouble(v2, 3, 10);
+  SL_v_setElementDouble(v2, 4, 21);
 
-	res = SL_m_matmulDouble(m1, m2);
+  m1 = SL_v_toMatrix(v1);
+  m2 = SL_v_toMatrix(v2);
+  SL_m_transpose(m1);
 
-	testy_assert_int_eq(res->width, 1);
-	testy_assert_int_eq(res->height, 1);
+  res = SL_m_matmulDouble(m1, m2);
 
-	double r = SL_m_getElementDouble(res, 0, 0);
-	
-	testy_assert_double_eq(r, 808);
+  testy_assert_int_eq(res->width, 1);
+  testy_assert_int_eq(res->height, 1);
+
+  double r = SL_m_getElementDouble(res, 0, 0);
+
+  testy_assert_double_eq(r, 808);
 
 TESTY_CLEANUP
-	if(v1)
-		SL_v_destroy(v1);
-	if(v2)
-		SL_v_destroy(v2);
-	if(m1)
-		SL_m_destroy(m1);
-	if(m2)
-		SL_m_destroy(m2);
-	if(res)
-		SL_m_destroy(res);
+  if (v1)
+    SL_v_destroy(v1);
+  if (v2)
+    SL_v_destroy(v2);
+  if (m1)
+    SL_m_destroy(m1);
+  if (m2)
+    SL_m_destroy(m2);
+  if (res)
+    SL_m_destroy(res);
 END_CASE
-
-
 
 int main() {
   testy_Runner runner = testy_allocRunner();
@@ -232,8 +230,8 @@ int main() {
   testy_addCase(runner, vector_slice_test);
   testy_addCase(runner, vector_copy_test);
   testy_addCase(runner, vector_sum_test);
-	testy_addCase(runner, dot_test);
-	testy_addCase(runner, to_matrix_dot_test);
+  testy_addCase(runner, dot_test);
+  testy_addCase(runner, to_matrix_dot_test);
   testy_run(runner);
   int errors = testy_errorCount(runner);
   testy_destroyRunner(runner);

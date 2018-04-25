@@ -42,4 +42,4 @@ SL_v_Vector *SL_v_diffDouble(SL_v_Vector *lhs, SL_v_Vector *rhs);
 
 double SL_v_dotDouble(SL_v_Vector *lhs, SL_v_Vector *rhs);
 
-SL_m_Matrix *SL_v_toMatrix();
+SL_m_Matrix *SL_v_toMatrix(SL_v_Vector *vector);
