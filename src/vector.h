@@ -40,8 +40,6 @@ void SL_v_substractDouble(SL_v_Vector *lhs, SL_v_Vector *rhs);
 
 SL_v_Vector *SL_v_diffDouble(SL_v_Vector *lhs, SL_v_Vector *rhs);
 
-double SL_v_dot(SL_v_Vector *lhs, SL_v_Vector *rhs);
+double SL_v_dotDouble(SL_v_Vector *lhs, SL_v_Vector *rhs);
 
 SL_m_Matrix *SL_v_toMatrix();
-
-void SL_v_print(SL_v_Vector *v);
