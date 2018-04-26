@@ -113,6 +113,31 @@ TESTY_CLEANUP
     SL_m_destroy(matrix2);
 END_CASE
 
+TESTY_CASE (matrix_to_vector)
+  SL_m_Matrix *matrix = NULL;
+  SL_m_Matrix *m2 = NULL;
+  SL_v_Vector *v = NULL;
+  matrix = SL_m_allocDouble(10, 15);
+
+  fill_matrix(matrix);
+
+  m2 = SL_m_slice(matrix, 2, 3, 1, 5);
+
+  v = SL_m_toVector(m2);
+
+  for (size_t i = 0; i < v->size; i++) {
+    testy_assert_double_eq(SL_v_getElementDouble(v, i), SL_m_getElementDouble(m2, 0, i));
+  }
+
+TESTY_CLEANUP
+  if (matrix)
+    SL_m_destroy(matrix);
+  if (m2)
+    SL_m_destroy(m2);
+  if (v)
+    SL_v_destroy(v);
+END_CASE
+
 int main() {
   testy_Runner runner = testy_allocRunner();
   testy_addCase(runner, matrix_alloc_test);
@@ -120,6 +145,7 @@ int main() {
   testy_addCase(runner, matrix_share_test);
   testy_addCase(runner, matrix_transpose_test);
   testy_addCase(runner, matrix_slice_test);
+  testy_addCase(runner, matrix_to_vector);
   testy_run(runner);
   int errors = testy_errorCount(runner);
   testy_destroyRunner(runner);

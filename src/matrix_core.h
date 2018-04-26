@@ -16,10 +16,12 @@
 /*!
  * @brief matrix representation
  */
+
+typedef struct __Vector SL_v_Vector;
+
 typedef struct __Matrix {
   SL_b_Block *block;
   size_t block_width;
-  size_t block_height;
   size_t height;
   size_t width;
   size_t offsetX;
@@ -81,6 +83,8 @@ SL_m_Matrix *SL_m_copyDouble(SL_m_Matrix *matrix);
  * @brief return submatrix with row starting at xbegin on original matrix
  */
 SL_m_Matrix *SL_m_slice(SL_m_Matrix *matrix, int xbegin, int ybegin, size_t width, size_t height);
+
+SL_v_Vector *SL_m_toVector(SL_m_Matrix *matrix);
 
 
 

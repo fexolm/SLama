@@ -8,6 +8,7 @@
 #include "matrix_core.h"
 #include <stdlib.h>
 #include <assert.h>
+#include "vector.h"
 
 static inline void __checkLimits(SL_m_Matrix *matrix, int x, int y) {
   assert(x >= 0 && x < matrix->width && "X out of range");
@@ -16,7 +17,6 @@ static inline void __checkLimits(SL_m_Matrix *matrix, int x, int y) {
 
 SL_m_Matrix *SL_m_allocDouble(size_t width, size_t height) {
   SL_m_Matrix *result = malloc(sizeof(SL_m_Matrix));
-  result->block_height = height;
   result->block_width = width;
   result->width = width;
   result->height = height;
@@ -37,7 +37,6 @@ static inline SL_m_Matrix *__copyBody(SL_m_Matrix *matrix) {
   result->offsetY = matrix->offsetY;
   result->width = matrix->width;
   result->height = matrix->height;
-  result->block_height = matrix->block_height;
   result->block_width = matrix->block_width;
   return result;
 }
@@ -95,6 +94,14 @@ SL_m_Matrix *SL_m_slice(SL_m_Matrix *matrix, int xbegin, int ybegin, size_t widt
   return result;
 }
 
-
+SL_v_Vector *SL_m_toVector(SL_m_Matrix *matrix) {
+  assert(matrix->width==1);
+  SL_v_Vector *res = malloc(sizeof(SL_v_Vector));
+  res->block = SL_b_share(matrix->block);
+  res->size = matrix->height;
+  res->offset = matrix->offsetX + matrix->offsetY*matrix->block_width;
+  res->shift = matrix->block_width;
+  return res;
+}
 
 

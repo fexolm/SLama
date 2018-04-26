@@ -8,10 +8,11 @@
 
 typedef struct __Matrix SL_m_Matrix;
 
-typedef struct {
+typedef struct __Vector{
   SL_b_Block *block;
   size_t offset;
   size_t size;
+  size_t shift;
 } SL_v_Vector;
 
 SL_v_Vector *SL_v_allocDouble(size_t size);
